@@ -1,35 +1,189 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Happy Birthday</title>
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <div class="birthdayCard">
-      <div class="cardFront">
-        <h3 class="happy">HAPPY BIRTHDAY</h3>
-        <div class="balloons">
-          <div class="balloon-1"></div>
-          <div class="balloon-2"></div>
-          <div class="balloon-3"></div>
-          <div class="balloon-4"></div>
-        </div>
-      </div>
-      <div class="cardInside">
-        <h3 class="back">HAPPY BIRTHDAY</h3>
-        <p>Dear Friend,</p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-          expedita debitis esse quaerat adipisci iste illum placeat incidunt
-          reprehenderit laudantium!
-        </p>
-        <p class="name">xxx</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Bookmark Icon styling */
+    .bookmark {
+      position: fixed;
+      font-size: 30px;
+      color: #333;
+      cursor: pointer;
+      z-index: 3;
+     
+      padding: 10px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    }
+
+    /* Bookmark icon positioned at the top-right */
+    .bookmark.top-right {
+      top: 20px;
+      right: 20px;
+    }
+
+    /* Bookmark icon positioned at the top-left */
+    .bookmark.top-left {
+      top: 20px;
+      right: 300px;
+    }
+    .bookmark.b-left{
+      top: 600px;
+      right: 300px;
+    }
+    .bookmark.b-right{
+      top:600px;
+      right:30px;
+    }
+
+    /* Popup Modal Styling */
+    #popupModal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 4; /* On top of other elements */
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Black with transparency */
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popupContent {
+      background-color: #fff;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+    }
+
+    /* Close button */
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 30px;
+      color: #333;
+      cursor: pointer;
+    }
+
+    /* Image inside popup */
+    .popupImage {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    /* Popup text */
+    .popupText {
+      font-family: "Arial", sans-serif;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <!-- Birthday Card Content -->
+  <div class="birthdayCard">
+    <!-- Image container to add the photo on the left side -->
+    <div class="cardImage"></div>
+
+    <div class="cardFront">
+      <h3 class="happy">HAPPY BIRTHDAY</h3>
+      <h1 class="happy" style="margin-top: 100px">CHUTKI</h1>
+      <div class="balloons">
+        <div class="balloon-1"></div>
+        <div class="balloon-2"></div>
+        <div class="balloon-3"></div>
+        <div class="balloon-4"></div>
       </div>
     </div>
-  </body>
+    <div class="cardInside">
+      <h3 class="back">HAPPY BIRTHDAY</h3>
+      <p>Chutki,</p>
+      <p>
+        Happiest Birthday to you.<br /><br />
+        Today, you step out of the troubles and chaos you endured the past
+        years. Today is the beginning of a brighter tomorrow. Your success and
+        prosperity bring me peace, just as a kid finds amusement seeing
+        glowing stars in the darkest night. You will come across every sort of
+        situation along the way, so remember to enjoy while it lasts. I am
+        sure you will do your best as always. And don't worry about anything;
+        you will always have a friend in me❤‍🩹
+      </p>
+      <p class="name" style="margin-top: 200px">-Arijit</p>
+    </div>
+  </div>
+
+  <!-- Bookmark Icons -->
+  <div class="bookmark top-right" id="bookmarkRight" onclick="openPopup('right')">&#128278;</div>
+  <div class="bookmark top-left" id="bookmarkLeft" onclick="openPopup('left')">&#128278;</div>
+  <div class="bookmark b-left" id="bookmarkbLeft" onclick="openPopup('bleft')">&#128278;</div>
+  <div class="bookmark b-right" id="bookmarkbRight" onclick="openPopup('bright')">&#128278;</div>
+  <!-- Popup Modal -->
+  <div id="popupModal">
+    <div class="popupContent">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <img
+        class="popupImage"
+        id="popupImage"
+        src=""
+        alt="Popup Image"
+      />
+      <p class="popupText" id="popupText">
+        Default popup text.
+      </p>
+    </div>
+    
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Function to open the popup modal
+    function openPopup(position) {
+      const popup = document.getElementById('popupModal');
+      const popupImage = document.getElementById('popupImage');
+      const popupText = document.getElementById('popupText');
+      
+      if (position === 'right') {
+        popupImage.src = 's2.jpg'; // Image for the top-right bookmark
+        popupText.textContent = "I remember that day vividly. You were so anxious about checking your answer key, too afraid to do it alone, and I could feel the nervousness in your voice. So, I invited you over to my place, hoping you'd find some comfort in not facing it alone. You were still scared, but being together seemed to ease some of that tension. The moment you saw your score—564!—we were both overwhelmed with joy. We couldn't contain our excitement and ended up dancing, celebrating all the hard work you put in. It was such a pure, joyful moment, and we captured it with a few photos to keep the memory alive forever.";
+      } else if (position === 'left') {
+        popupImage.src = 's3.jpg'; // Image for the top-left bookmark
+        popupText.textContent = 'That day was such a spontaneous adventure! You mentioned being bored and how your father was out of town, so we decided to just go for a long ride. We had no destination in mind at first, but somehow, while chatting, we ended up in Oanikhaiti, which was hilarious in itself! I remember you stumbling upon some dogs and instantly connecting with them—it was so heartwarming to watch you play with them. We took some adorable photos, capturing those carefree moments. It turned out to be one of those unexpectedly perfect days, and it’s a memory I’ll always cherish.';
+      }else if (position === 'bleft') {
+        popupImage.src = 's4.jpg'; // Image for the top-left bookmark
+        popupText.textContent = "Oh my gosh, that day was such a rollercoaster! Despite all the pain you were dealing with in your back, you somehow managed to laugh and enjoy the time with us. I remember me and Didi were planning to stay up that night, and I couldn’t resist cracking those lame jokes that made you so annoyed—you even started scolding me, which just made me laugh harder! Later, when you finally drifted off to sleep, I stayed up the whole night, just to make sure you slept peacefully. It gave me this overwhelming sense of responsibility, and honestly, it was such a sweet and memorable night.";
+      }else if (position === 'bright') {
+        popupImage.src = 's5.jpg'; // Image for the top-left bookmark
+        popupText.textContent = "Oh, how could I forget my birthday last year! We went to that hotel, and you had your heart set on sitting in that one spot with the swinging chair. But then, this random couple decided to camp there the entire time, just sipping on their drinks. You were so frustrated, constantly cursing and judging them under your breath—it was hilarious! And yes, you had cut your beard that day, and you kept saying you looked awful, but honestly, it wasn’t as bad as you thought. That day had such a fun mix of laughter and little frustrations, but in the end, it made for a birthday to remember!";
+      }
+
+      popup.style.display = 'flex';
+    }
+
+    // Function to close the popup modal
+    function closePopup() {
+      const popup = document.getElementById('popupModal');
+      popup.style.display = 'none';
+    }
+
+    // Close the modal if the user clicks outside of the popup content
+    window.onclick = function (event) {
+      const popup = document.getElementById('popupModal');
+      if (event.target === popup) {
+        popup.style.display = 'none';
+      }
+    };
+  </script>
+</body>
 </html>

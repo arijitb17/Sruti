@@ -3,13 +3,15 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #239ac2;
+  background-color: #dbb620;
+  margin: 0;
+  padding: 0;
 }
 
 .birthdayCard {
   position: relative;
-  width: 250px;
-  height: 350px;
+  width: 250px; /* Increased width */
+  height: 400px; /* Increased height */
   cursor: pointer;
   transform-style: preserve-3d;
   transform: perspective(2500px);
@@ -30,11 +32,32 @@ body {
   visibility: hidden;
 }
 
+/* Container for the image - on the left side, further outside the card */
+.cardImage {
+  position: absolute;
+  width: 100px;
+  height: 150px;
+  left: -200px; /* Adjusted to be further outside the card on the left */
+  top: 50%; /* Center vertically inside the card */
+  transform: translateY(-50%) scaleX(-1); /* Mirror effect and center vertically */
+  z-index: 2; /* Ensure it appears above other elements */
+  background-image: url('passort.jpg'); /* Replace with the image URL */
+  background-size: cover;
+  background-position: center;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.6s ease-in-out, left 0.6s ease-in-out; /* Smooth transitions */
+}
+
+.birthdayCard:hover .cardImage {
+  opacity: 1; /* Make the image visible */
+  left: 20px; /* Move the image into view inside the card */
+}
+
 .cardFront {
   position: relative;
   background-color: #fff;
-  width: 250px;
-  height: 350px;
+  width: 350px; /* Adjusted to match birthdayCard */
+  height: 500px; /* Adjusted to match birthdayCard */
   overflow: hidden;
   transform-origin: left;
   box-shadow: inset 100px 20px 100px rgba(0, 0, 0, 0.2),
@@ -45,6 +68,7 @@ body {
 .happy {
   font-family: Tahoma, sans-serif;
   text-align: center;
+font-size: 2rem;
   margin: 30px;
   background-image: linear-gradient(120deg, #ffd856 0%, #f98c6e 100%);
   transition: 0.1s;
@@ -52,6 +76,10 @@ body {
 
 .balloons {
   position: absolute;
+  width: 100%;
+  height: 180px; /* Adjust the height for the balloon area */
+  bottom: 0; /* Position the balloons at the bottom of the card */
+  z-index: 1; /* Ensure balloons are in front of the card background */
 }
 
 .balloon-1,
@@ -64,30 +92,32 @@ body {
   border-radius: 50%;
 }
 
+/* Adjust the balloon positions to create a staggered look */
 .balloon-1 {
   background-color: rgba(255, 40, 90, 0.7);
-  left: -10px;
-  top: 50px;
+  left: 20px;
+  bottom: 10px; /* Slightly above the bottom */
 }
 
 .balloon-2 {
   background-color: rgba(9, 215, 160, 0.7);
-  left: 50px;
-  top: 20px;
+  left: 80px;
+  bottom: 40px; /* Positioned higher */
 }
 
 .balloon-3 {
   background-color: rgba(255, 186, 26, 0.7);
-  left: 110px;
-  top: 50px;
+  left: 140px;
+  bottom: 20px; /* Slightly above */
 }
 
 .balloon-4 {
   background-color: rgba(12, 122, 159, 0.7);
-  left: 170px;
-  top: 50px;
+  left: 200px;
+  bottom: 50px; /* Positioned higher */
 }
 
+/* Balloon strings */
 .balloon-1::before,
 .balloon-2::before,
 .balloon-3::before,
@@ -97,7 +127,7 @@ body {
   width: 1px;
   height: 155px;
   background-color: #ffc848;
-  top: 95px;
+  bottom: -155px; /* Keep the string at the bottom of the balloon */
   left: 43px;
 }
 
@@ -109,10 +139,11 @@ body {
   position: absolute;
   border-right: 7px solid transparent;
   border-left: 7px solid transparent;
-  top: 94px;
+  bottom: -10px; /* Adjust string tip positioning */
   left: 37px;
 }
 
+/* Balloon tails (bottom triangle shape) */
 .balloon-1::after {
   border-bottom: 10px solid #ff3e6b;
 }
@@ -132,8 +163,8 @@ body {
 .cardInside {
   position: absolute;
   background-color: #fff;
-  width: 250px;
-  height: 350px;
+  width: 350px; /* Adjusted to match birthdayCard */
+  height: 500px; /* Adjusted to match birthdayCard */
   z-index: -1;
   left: 0;
   top: 0;
@@ -160,4 +191,137 @@ p {
   margin: 30px;
   outline-color: #333;
   outline-style: dotted;
+}
+
+/* Media query for mobile responsiveness */
+@media (max-width: 600px) {
+  .birthdayCard {
+    width: 200px;
+    height: 370px;
+  }
+
+  .cardFront,
+  .cardInside {
+    width: 200px;
+    height: 370px;
+  }
+
+  .cardImage {
+    width: 80px;
+    height: 120px;
+    left: -150px;
+  }
+
+  .balloon-1,
+  .balloon-2,
+  .balloon-3,
+  .balloon-4 {
+    width: 60px;
+    height: 70px;
+  }
+
+  .balloon-1 {
+    left: 10px;
+    bottom: 5px;
+  }
+
+  .balloon-2 {
+    left: 55px;
+    bottom: 20px;
+  }
+
+  .balloon-3 {
+    left: 100px;
+    bottom: 10px;
+  }
+
+  .balloon-4 {
+    left: 145px;
+    bottom: 30px;
+  }
+
+  .happy {
+    font-size: 20px; /* Reduced text size */
+  }
+
+  p {
+    font-size: 12px; /* Reduced text size */
+    margin: 20px;
+  }
+
+  .name {
+    font-size: 14px; /* Reduced text size */
+    left: 100px;
+    top: 150px;
+  }
+
+  .back {
+    font-size: 12px; /* Reduced text size */
+  }
+}
+/* Bookmark styles */
+.bookmark {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  background-color: #ff6f61;
+  padding: 5px 10px;
+  border-radius: 5px;
+  z-index: 5;
+  transition: background-color 0.3s ease;
+}
+
+.bookmark:hover {
+  background-color: #e65a50;
+}
+
+/* Popup Modal styles */
+.popup-modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7); /* Black background with opacity */
+}
+
+.popup-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+  border-radius: 10px;
+  position: relative;
+}
+
+.popup-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.popup-content p {
+  font-family: 'Tahoma', sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
 }
